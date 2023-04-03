@@ -3,15 +3,8 @@
 -- # URL:        https://github.com/javiorfo/nvim-popcorn #
 -- ########################################################
 
+local borders = require'popcorn.util'.borders
 local M = {}
-local borders = {
-    horizontal        = "─",
-    vertical          = "│",
-    corner_left_up    = "┌",
-    corner_right_up   = "┐",
-    corner_right_down = "┘",
-    corner_left_down  = "└"
-}
 
 M.callback = nil
 
@@ -32,13 +25,26 @@ local function build_popup(title, width, height)
     return popup
 end
 
+local function test_callback()
+    print(vim.fn.getline("."))
+end
+
 function M:new(opts)
     opts = {
         width = 40,
         height = 8,
-        title = "Probando",
-        text = { "line 1", "line 2" },
-        callback = function() print("callbackote") end
+        title = {
+            text = "Probando",
+            style = "Boolean"
+        },
+        text = {
+            "Project Metadata",
+            "   Group    =>",
+            "   Artifact =>",
+            "   Name     =>",
+            "Language    =>",
+        },
+        callback = test_callback
     }
     M.callback = opts.callback
     self.__index = self
@@ -47,9 +53,9 @@ function M:new(opts)
 end
 
 function M.execute_callback()
-    -- TODO close popup before
     M.callback()
     M.callback = nil
+    vim.cmd("quit")
 end
 
 function M:pop()
@@ -58,7 +64,7 @@ function M:pop()
         local width = self.width
         local height = self.height
 
-        local lines = build_popup(self.title, width, height)
+        local lines = build_popup(self.title.text, width, height)
         vim.api.nvim_buf_set_lines(buf_border, 0, -1, true, lines)
 
         local opts_border = { relative = 'editor',
@@ -71,8 +77,8 @@ function M:pop()
         }
 
         vim.api.nvim_open_win(buf_border, true, opts_border)
-        vim.cmd("syn keyword wildcatInfoTitle WILDCAT | hi link wildcatInfoTitle Boolean")
-
+        vim.cmd(string.format("syn keyword popcornTitle %s | hi link popcornTitle %s", self.title.text, self.title.style))
+        -- TODO jugar con row, col, width y height para crear dos buffers
         local opts_text = {
             relative = 'editor',
             row = opts_border.row + 1,
