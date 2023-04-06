@@ -1,7 +1,7 @@
--- ########################################################
--- # Maintainer: Javier Orfo                              #
--- # URL:        https://github.com/javiorfo/nvim-popcorn #
--- ########################################################
+-- ########################################################$
+-- # Maintainer: Javier Orfo                               #
+-- # URL:        https://github.com/whiskoder/nvim-popcorn #
+-- ########################################################$
 
 local borders = require'popcorn.util'.borders1
 local M = {}
