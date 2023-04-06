@@ -3,12 +3,13 @@
 -- # URL:        https://github.com/javiorfo/nvim-popcorn #
 -- ########################################################
 
-local borders = require'popcorn.util'.borders
+local borders = require'popcorn.util'.borders1
 local M = {}
 
 M.callback = nil
 
 local function build_popup(title, width, height)
+    -- TODO texto en bottom también (opcional)
     local size_top_length = ((width - 4 - #title) / 2)
     local side_top = string.rep(borders.horizontal, size_top_length)
     local popup = {}
@@ -31,11 +32,11 @@ end
 
 function M:new(opts)
     opts = {
-        width = 40,
+        width = 100,
         height = 8,
         title = {
             text = "Probando",
-            style = "Boolean"
+            link_to = "Boolean"
         },
         text = {
             "Project Metadata",
@@ -64,8 +65,12 @@ function M:pop()
         local width = self.width
         local height = self.height
 
+        width = ui.width > width and width or (ui.width - 4)
+        height = ui.height > height and height or (ui.height - 4)
+
         local lines = build_popup(self.title.text, width, height)
         vim.api.nvim_buf_set_lines(buf_border, 0, -1, true, lines)
+print(ui.width)
 
         local opts_border = { relative = 'editor',
             width = width,
@@ -77,8 +82,7 @@ function M:pop()
         }
 
         vim.api.nvim_open_win(buf_border, true, opts_border)
-        vim.cmd(string.format("syn keyword popcornTitle %s | hi link popcornTitle %s", self.title.text, self.title.style))
-        -- TODO jugar con row, col, width y height para crear dos buffers
+        vim.cmd(string.format("syn keyword popcornTitle %s | hi link popcornTitle %s", self.title.text, self.title.link_to))
         local opts_text = {
             relative = 'editor',
             row = opts_border.row + 1,
@@ -93,6 +97,8 @@ function M:pop()
         vim.cmd("syn keyword wildcatInfoText Server App Base Deployed Home | hi link wildcatInfoText Boolean")
 
         vim.api.nvim_buf_set_lines(buf_text, 0, -1, true, self.text)
+        -- TODO con esta línea se puede abrir un archivo en el buffer
+--         vim.cmd("e /home/javier/hola.json")
 
         vim.cmd(string.format("au BufLeave <buffer> bd %d | quit", buf_border))
         -- TODO cambiar por nvim_buf_set_keymap
