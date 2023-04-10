@@ -1,6 +1,6 @@
 -- #########################################################
--- # Maintainer: Javier Orfo                               #
--- # URL:        https://github.com/whiskoder/nvim-popcorn #
+-- # Maintainer: Mr. Charkuils                             #
+-- # URL:        https://github.com/charkuils/nvim-popcorn #
 -- #########################################################
 
 local M = {}
