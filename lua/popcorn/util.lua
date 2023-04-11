@@ -1,8 +1,3 @@
--- #########################################################
--- # Maintainer: Mr. Charkuils                             #
--- # URL:        https://github.com/charkuils/nvim-popcorn #
--- #########################################################
-
 local M = {}
 
 M.borders = {
