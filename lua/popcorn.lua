@@ -1,17 +1,17 @@
-local borders = require'popcorn.util'.borders1
+local borders = require'popcorn.borders'
 local M = {}
 
 M.callback = nil
 
-local function build_popup(title, width, height)
+local function build_popup(title, width, height, border)
     -- TODO texto en bottom también (opcional)
     local size_top_length = ((width - 4 - #title) / 2)
-    local side_top = string.rep(borders.horizontal, size_top_length)
+    local side_top = string.rep(border.horizontal, size_top_length)
     local popup = {}
-    local top_line = string.format("%s%s %s %s%s", borders.corner_left_up, side_top, title, side_top, borders.corner_right_up)
+    local top_line = string.format("%s%s %s %s%s", border.corner_left_up, side_top, title, side_top, border.corner_right_up)
     local top_line_length = #top_line:gsub("[\128-\191]", "")
-    local lateral_line = string.format("%s%s%s", borders.vertical, string.rep(" ", top_line_length - 2), borders.vertical)
-    local bottom_line = string.format("%s%s%s", borders.corner_left_down, string.rep(borders.horizontal, top_line_length - 2), borders.corner_right_down)
+    local lateral_line = string.format("%s%s%s", border.vertical, string.rep(" ", top_line_length - 2), border.vertical)
+    local bottom_line = string.format("%s%s%s", border.corner_left_down, string.rep(border.horizontal, top_line_length - 2), border.corner_right_down)
     table.insert(popup, top_line)
     height = height - 2
     for _ = 1, height do
@@ -21,27 +21,7 @@ local function build_popup(title, width, height)
     return popup
 end
 
-local function test_callback()
-    print(vim.fn.getline("."))
-end
-
 function M:new(opts)
-    opts = {
-        width = 100,
-        height = 8,
-        title = {
-            text = "Probando",
-            link_to = "Boolean"
-        },
-        text = {
-            "Project Metadata",
-            "   Group    =>",
-            "   Artifact =>",
-            "   Name     =>",
-            "Language    =>",
-        },
-        callback = test_callback
-    }
     M.callback = opts.callback
     self.__index = self
     setmetatable(opts, self)
@@ -55,6 +35,9 @@ function M.execute_callback()
 end
 
 function M:pop()
+        if not self.border then
+            self.border = borders.simple_border
+        end
         local buf_border = vim.api.nvim_create_buf(false, true)
         local ui = vim.api.nvim_list_uis()[1]
         local width = self.width
@@ -63,7 +46,7 @@ function M:pop()
         width = ui.width > width and width or (ui.width - 4)
         height = ui.height > height and height or (ui.height - 4)
 
-        local lines = build_popup(self.title.text, width, height)
+        local lines = build_popup(self.title.text, width, height, self.border)
         vim.api.nvim_buf_set_lines(buf_border, 0, -1, true, lines)
 print(ui.width)
 
@@ -92,6 +75,8 @@ print(ui.width)
         vim.cmd("syn keyword wildcatInfoText Server App Base Deployed Home | hi link wildcatInfoText Boolean")
 
         vim.api.nvim_buf_set_lines(buf_text, 0, -1, true, self.text)
+        -- TODO para abrir una terminal
+--         vim.cmd("start | term lua /home/javier/Documentos/lua/oop.lua")
         -- TODO con esta línea se puede abrir un archivo en el buffer
 --         vim.cmd("e /home/javier/hola.json")
 
@@ -99,6 +84,7 @@ print(ui.width)
         -- TODO cambiar por nvim_buf_set_keymap
         vim.cmd("nnoremap <buffer> <esc> <cmd>quit<cr>")
         vim.cmd("nnoremap <buffer> <cr> <cmd>lua require'popcorn'.execute_callback()<cr>")
+--         vim.cmd("set nomodifiable")
 end
 
 return M

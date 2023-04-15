@@ -1,6 +1,6 @@
 local M = {}
 
-M.borders = {
+M.simple_border = {
     horizontal        = "─",
     vertical          = "│",
     corner_left_up    = "┌",
@@ -9,7 +9,7 @@ M.borders = {
     corner_left_down  = "└"
 }
 
-M.borders1 = {
+M.simple_thick_border = {
     horizontal        = "━",
     vertical          = "┃",
     corner_left_up    = "┏",
@@ -18,7 +18,7 @@ M.borders1 = {
     corner_left_down  = "┗"
 }
 
-M.borders2 = {
+M.double_border = {
     horizontal        = "═",
     vertical          = "║",
     corner_left_up    = "╔",
@@ -27,7 +27,7 @@ M.borders2 = {
     corner_left_down  = "╚"
 }
 
-M.borders3 = {
+M.rounded_corners_border = {
     horizontal        = "─",
     vertical          = "│",
     corner_left_up    = "╭",
@@ -36,7 +36,7 @@ M.borders3 = {
     corner_left_down  = "╰"
 }
 
-M.borders4 = {
+M.double_simple_border = {
     horizontal        = "═",
     vertical          = "│",
     corner_left_up    = "╒",
