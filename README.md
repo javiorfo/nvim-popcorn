@@ -21,10 +21,13 @@ use 'charkuils/nvim-popcorn'
 | Set width and height | :heavy_check_mark: |  |
 | Set title | :heavy_check_mark: | Optional. Centered with highlighting options |
 | Set footer | :heavy_check_mark: | Optional. Centered with highlighting options |
+| Title or footer with right or left align | :x: | |
+| Backgroung color | :x: | Same of editor |
 | Content in text format | :heavy_check_mark: | By table. With highlighting options |
 | Content file | :heavy_check_mark: | By string |
 | Content open to implementation | :heavy_check_mark: | By function |
 | Callback | :heavy_check_mark: | Optional. By function |
+| Close popup | :heavy_check_mark: | Pressing <ESC> or Clicking outside of it |
 
 ## Usage
 - By default the values by parameters are:
