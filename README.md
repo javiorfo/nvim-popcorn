@@ -89,7 +89,7 @@ popcorn:new(opts):pop()
 ## Screenshots
 #### Examples of the differents popup's included in this library. Run `:luafile %` in [these files](https://github.com/charkuils/nvim-popcorn/blob/master/tests)
 
-<img src="https://github.com/charkuils/img/blob/master/nvim-popcorn/popcorn.gif?raw=true" alt="popcorn" style="width:500px;"/>
+<img src="https://github.com/charkuils/img/blob/master/nvim-popcorn/popcorn.gif?raw=true" alt="popcorn" style="width:800px;"/>
 
 **NOTE:** The colorscheme **malt** from [nvim-whisky](https://github.com/charkuils/nvim-whisky) is used in this image.
 
