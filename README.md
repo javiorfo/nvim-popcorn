@@ -1,2 +1,2 @@
 # nvim-popcorn
-Neovim plugin for popup utilities written in Lua (WIP) 
+Neovim library for popup utilities written in Lua

@@ -1,7 +1,7 @@
 local borders = require'popcorn.borders'
-local M = {}
+local popcorn = {}
 
-M.callback = nil
+popcorn.callback = nil
 
 local function bottom_amend(title, footer)
     if (#title % 2 == 0 and #footer % 2 == 0) or (#title % 2 ~= 0 and #footer % 2 ~= 0) then
@@ -14,7 +14,8 @@ local function build_popup(title, footer, width, height, border)
     local side_top = string.rep(border.horizontal, size_top_length)
     local popup = {}
 
-    local top_line = string.format("%s%s %s %s%s", border.corner_left_up, side_top, title, side_top, border.corner_right_up)
+    title = title ~= "" and string.format(" %s ", title) or border.horizontal
+    local top_line = string.format("%s%s%s%s%s", border.corner_left_up, side_top, title, side_top, border.corner_right_up)
     local top_line_length = #top_line:gsub("[\128-\191]", "")
 
     local lateral_line = string.format("%s%s%s", border.vertical, string.rep(" ", top_line_length - 2), border.vertical)
@@ -40,17 +41,19 @@ local function build_popup(title, footer, width, height, border)
 end
 
 
-function M:new(opts)
-    M.callback = opts.callback
+function popcorn:new(opts)
+    popcorn.callback = opts.callback
     self.__index = self
     setmetatable(opts, self)
     return opts
 end
 
-function M.execute_callback()
-    M.callback()
-    M.callback = nil
-    vim.cmd("quit")
+function popcorn.execute_callback()
+    if popcorn.callback then
+        popcorn.callback()
+        popcorn.callback = nil
+        vim.cmd("quit")
+    end
 end
 
 local function process_content(content)
@@ -65,7 +68,7 @@ local function process_content(content)
     return result
 end
 
-function M:pop()
+function popcorn:pop()
         if not self.border then
             self.border = borders.simple_border
         end
@@ -91,7 +94,8 @@ function M:pop()
 
         vim.api.nvim_buf_set_lines(buf_border, 0, -1, true, lines)
 
-        local opts_border = { relative = 'editor',
+        local opts_border = {
+            relative = 'editor',
             width = width,
             height = height,
             col = (ui.width / 2) - (width / 2),
@@ -101,7 +105,10 @@ function M:pop()
         }
 
         vim.api.nvim_open_win(buf_border, true, opts_border)
-        vim.cmd(string.format("syn match popcornTitle '%s' | hi link popcornTitle %s", self.title[1], self.title[2]))
+
+        if self.title and self.title[1] and self.title[2] then
+            vim.cmd(string.format("syn match popcornTitle '%s' | hi link popcornTitle %s", self.title[1], self.title[2]))
+        end
 
         if self.footer and self.footer[1] and self.footer[2] then
             vim.cmd(string.format("syn match popcornFooter '%s' | hi link popcornFooter %s", self.footer[1], self.footer[2]))
@@ -121,15 +128,22 @@ function M:pop()
 
         if type(self.content) == "table" then
             vim.api.nvim_buf_set_lines(buf_text, 0, -1, true, process_content(self.content))
-        elseif type(self.content) == "string" and vim.fn.filereadable(self.content) then
+        elseif type(self.content) == "string" and self.content ~= "" and vim.fn.filereadable(self.content) then
             vim.cmd("e " .. self.content)
         elseif type(self.content) == "function" then
             self.content()
         end
 
-        vim.cmd(string.format("au BufLeave <buffer> bd %d | quit", buf_border))
-        vim.cmd("nnoremap <buffer> <esc> <cmd>quit<cr>")
-        vim.cmd("nnoremap <buffer> <cr> <cmd>lua require'popcorn'.execute_callback()<cr>")
+        vim.api.nvim_create_autocmd({ "BufLeave" }, {
+            pattern = { "<buffer>" },
+            callback = function()
+                pcall(vim.cmd, string.format("bd %d | quit", buf_border))
+            end
+        })
+
+        local map_opts = { noremap = true, silent = true }
+        vim.api.nvim_buf_set_keymap(buf_text, 'n', '<esc>', '<cmd>quit<cr>', map_opts)
+        vim.api.nvim_buf_set_keymap(buf_text, 'n', '<cr>', '<cmd>lua require("popcorn").execute_callback()<cr>', map_opts)
 end
 
-return M
+return popcorn
