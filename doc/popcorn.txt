@@ -1,0 +1,80 @@
+*popcorn.txt* nvim-popcorn
+Neovim libraty for popup utilities
+ _ __   ___  _ __   ___ ___  _ __ _ __  ~
+| '_ \ / _ \| '_ \ / __/ _ \| '__| '_ \ ~
+| |_) | (_) | |_) | (_| (_) | |  | | | |~
+| .__/ \___/| .__/ \___\___/|_|  |_| |_|~
+|_|         |_|                         ~
+
+REFERENCE MANUAL
+================================================================================
+CONTENTS                                                          *nvim-popcorn*
+
+    1. Introduction ............. |ship-introduction|
+    2. Quickstart ............... |ship-quickstart|
+     2.1 Ship Files ............. |ship-quickstart-files|
+     2.2 Simple Usage ........... |ship-quickstart-usage|
+    3. Setup .................... |ship-setup|
+    4. Environment .............. |ship-environment|
+     4.1 Lua Files .............. |ship-environment-lua|
+     4.2 Special ................ |ship-environment-special|
+    5. Commands ................. |ship-commands|
+    6. Logs ..................... |ship-logs|
+    7. Integrations ............. |ship-integrations|
+
+================================================================================
+1. INTRODUCTION                                           *popcorn-introduction*
+
+nvim-ship is a Neovim plugin for calling APIs with REST and GraphQL. Highly
+configurable with many options to set, like request and response views,
+environment variables, output files and a 'special' way to update a file with
+variables.
+
+Some Features
+
+    - Rest and GraphQL calls
+    - Own `ship` syntax file
+    - Headers configuration
+    - Authorization support
+    - Body requests by file
+    - Environment variables
+    - Telescope integration
+    - Many more...
+
+================================================================================
+2. QUICK START                                                 *ship-quickstart*
+
+The following are quickstart guides of nvim-ship
+
+--------------------------------------------------------------------------------
+2.1 SHIP FILES                                           *ship-quickstart-files*
+
+The 'ship' files are those with .ship extension (Ex: some_file.ship). These
+files must contain the following syntax: >
+    # This is a comment
+
+    # Required BASE section
+    # This section will contain 'url' (required), 'method' (required) 
+    # and 'env' (optional) tags 
+    ~[BASE]~
+    url https://domain.com/path
+    method GET
+    env /path/to/env_variables.lua
+
+    # Required HEADERS section
+    # This section will contain the headers required by the user 
+    ~[HEADERS]~
+    content-type application/json
+    
+    # Optional BODY section
+    # This section will contain the body required by the user 
+    # It could be a JSON object, XML or file (this one using the tag
+    # 'ship_body_file')
+    ~[BODY]~
+    {
+        "id": 1000,
+        "desc": "something"
+    }
+<
+--------------------------------------------------------------------------------
+

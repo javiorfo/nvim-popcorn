@@ -40,7 +40,6 @@ local function build_popup(title, footer, width, height, border)
     return popup
 end
 
-
 function popcorn:new(opts)
     popcorn.callback = opts.callback
     self.__index = self
@@ -90,7 +89,7 @@ function popcorn:pop()
             title_text = self.title[1] or title_text
         end
 
-        local lines = build_popup(title_text, footer_text, width, height, self.border)
+        local lines = build_popup(title_text, footer_text, width, height, (self.border or borders.simple_thick_border))
 
         vim.api.nvim_buf_set_lines(buf_border, 0, -1, true, lines)
 
