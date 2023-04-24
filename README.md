@@ -83,7 +83,7 @@ popcorn:new(opts):pop()
 ```
 
 #### BORDERS
-- Check the spinners availables in [this file](https://github.com/charkuils/nvim-popcorn/blob/master/lua/popcorn/borders.lua)
+- Check the borders available in [this file](https://github.com/charkuils/nvim-popcorn/blob/master/lua/popcorn/borders.lua)
 - You can add your own border if you like. Further information in `:help popcorn`
 
 ## Screenshots
