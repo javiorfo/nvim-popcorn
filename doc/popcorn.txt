@@ -11,7 +11,9 @@ REFERENCE MANUAL
 CONTENTS                                                          *nvim-popcorn*
 
     1. Introduction ............. |popcorn-introduction|
-    2. Quickstart ............... |popcorn-quickstart|
+    2. Usage .................... |popcorn-usage|
+    3. Borders .................. |popcorn-borders|
+    4. Close .................... |popcorn-close|
 
 ================================================================================
 1. INTRODUCTION                                           *popcorn-introduction*
@@ -20,8 +22,110 @@ nvim-popcorn is a Neovim library for popup utilities. Very configurable with
 some options to set, like borders, width, height, title, footer, content, etc.
 
 ================================================================================
-2. QUICK START                                              *popcorn-quickstart*
+2. USAGE                                                         *popcorn-usage*
 
-The following are quickstart guides of nvim-popcorn
+The following is an example of a nvim-popcorn usage
 
---------------------------------------------------------------------------------
+This is an object description. Notice that some values are required and others
+are optional: >
+    local popcorn = require'popcorn'
+    local borders = require'popcorn.borders'
+
+    local opts = {
+        -- Required
+        width = 50,
+
+        -- Required
+        height = 8,
+
+        -- Optional. If not set then simple_thick_border will be the default
+        border = borders.rounded_corners_border,
+
+        -- Optional. The first table value is the title text, 
+        -- the second one is the group to link
+        -- The second value is optional too. In this case It will highlight 
+        -- "Popcorn Title" linking to "Type" group
+        title = { "Popcorn Title", "Type" },
+
+        -- Optional. The first table value is the footer text,
+        -- the second one is the group to link
+        -- The second value is optional too. In this case It will highlight 
+        -- "Popcorn Footer" linking to "String" group
+        footer = { "Popcorn Footer", "String" },
+
+        -- Optional. This will be the body of the popup 
+        -- content is a table
+        content = {
+            { "Results: ", "Constant" }, -- The second value is the 
+                                         -- group to link to
+            { "     - Some text here" },
+            { "     - More text here" }
+        },
+
+        -- Optional. A second approach could be to open a file and show 
+        -- the content in the popup body
+        -- content is a string
+        -- content = "path/to/file/to/show/file.txt"
+
+        -- Optional. A third approach could be to implement 
+        -- some code in a function
+        -- content is a function
+        -- In this example a terminal is opened in the popup body
+        -- content = function() vim.cmd("start | term") end 
+        
+        -- Optional. If a callback is necessary this is the implementation
+        -- Pressing <CR> will execute the callback
+        -- In this example It will print the first line of the popup body
+        callback = function()
+            print("Callback result => " .. vim.fn.getline(1))
+        end
+    }
+
+    -- Open popup
+    popcorn:new(opts):pop()
+<
+
+================================================================================
+3. BORDERS                                                     *popcorn-borders*
+
+There are 5 border styles to choose in nvim-popcorn: >
+    local borders = require'popcorn.borders'
+
+    -- borders.simple_border
+    -- borders.simple_thick_border
+    -- borders.double_border
+    -- borders.rounded_corners_border
+    -- borders.double_simple_border
+    
+    require'popcorn':new({
+        width = 80,
+        height = 40,
+        border = border.double_border, -- Use any of above
+        content = {{ "Some text" }}
+    }):pop()
+< 
+
+A custom implementation is available as well with the following format: >
+    local my_border = {
+        horizontal        = "─",
+        vertical          = "│",
+        corner_left_up    = "┌",
+        corner_right_up   = "┐",
+        corner_right_down = "┘",
+        corner_left_down  = "└"
+    }
+
+    require'popcorn':new({
+        width = 80,
+        height = 40,
+        border = my_border,
+        content = {{ "Some text" }}
+    }):pop()
+<
+
+================================================================================
+4. CLOSE                                                         *popcorn-close*
+
+For closing the popup simple press `ESC` or click outside of it.
+
+================================================================================

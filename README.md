@@ -30,7 +30,7 @@ use 'javiorfo/nvim-popcorn'
 | Close popup | :heavy_check_mark: | Pressing <ESC> or Clicking outside of it |
 
 ## Usage
-- By default the values by parameters are:
+- This is an object description. Notice that some values are required and others are optional:
 ```lua
 local popcorn = require'popcorn'
 local borders = require'popcorn.borders'
@@ -46,11 +46,11 @@ local opts = {
     border = borders.rounded_corners_border,
 
     -- Optional. The first table value is the title text, the second one is the group to link
-    -- The second value is optional too. In this case I will highlight "Popcorn Title" linking to "Type" group
+    -- The second value is optional too. In this case It will highlight "Popcorn Title" linking to "Type" group
     title = { "Popcorn Title", "Type" },
 
     -- Optional. The first table value is the footer text, the second one is the group to link
-    -- The second value is optional too. In this case I will highlight "Popcorn Footer" linking to "String" group
+    -- The second value is optional too. In this case It will highlight "Popcorn Footer" linking to "String" group
     footer = { "Popcorn Footer", "String" },
 
     -- Optional. This will be the body of the popup 
