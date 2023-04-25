@@ -9,14 +9,18 @@ local function bottom_amend(title, footer)
     end
 end
 
+local function clean_length(value)
+    return #value:gsub("[\128-\191]", "")
+end
+
 local function build_popup(title, footer, width, height, border)
-    local size_top_length = ((width - 4 - #title) / 2)
+    local size_top_length = ((width - 4 - clean_length(title)) / 2)
     local side_top = string.rep(border.horizontal, size_top_length)
     local popup = {}
 
     title = title ~= "" and string.format(" %s ", title) or border.horizontal
     local top_line = string.format("%s%s%s%s%s", border.corner_left_up, side_top, title, side_top, border.corner_right_up)
-    local top_line_length = #top_line:gsub("[\128-\191]", "")
+    local top_line_length = clean_length(top_line)
 
     local lateral_line = string.format("%s%s%s", border.vertical, string.rep(" ", top_line_length - 2), border.vertical)
 
@@ -24,7 +28,7 @@ local function build_popup(title, footer, width, height, border)
     if #footer == 0 then
         bottom_line = string.format("%s%s%s", border.corner_left_down, string.rep(border.horizontal, top_line_length - 2), border.corner_right_down)
     else
-        local size_bottom_length = ((width - 4 - #footer) / 2)
+        local size_bottom_length = ((width - 4 - clean_length(footer)) / 2)
         local side_bottom = string.rep(border.horizontal, size_bottom_length)
         local side_bottom2 = string.rep(border.horizontal, bottom_amend(title, footer) and size_bottom_length - 1 or size_bottom_length)
         bottom_line = string.format("%s%s %s %s%s", border.corner_left_down, side_bottom, footer, side_bottom2, border.corner_right_down)
