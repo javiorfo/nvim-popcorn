@@ -32,6 +32,10 @@ local function build_popup(title, footer, width, height, border)
         local side_bottom = string.rep(border.horizontal, size_bottom_length)
         local side_bottom2 = string.rep(border.horizontal, bottom_amend(title, footer) and size_bottom_length - 1 or size_bottom_length)
         bottom_line = string.format("%s%s %s %s%s", border.corner_left_down, side_bottom, footer, side_bottom2, border.corner_right_down)
+        if clean_length(bottom_line) < top_line_length then
+            local add_bottom =  string.rep(border.horizontal, top_line_length - clean_length(bottom_line))
+            bottom_line = string.format("%s%s %s %s%s", border.corner_left_down, side_bottom, footer, side_bottom2 .. add_bottom, border.corner_right_down)
+        end
     end
 
     table.insert(popup, top_line)
