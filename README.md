@@ -91,4 +91,4 @@ popcorn:new(opts):pop()
 
 <img src="https://github.com/javiorfo/img/blob/master/nvim-popcorn/popcorn.gif?raw=true" alt="popcorn" style="width:800px;"/>
 
-**NOTE:** The colorscheme **malt** from [nvim-whisky](https://github.com/javiorfo/nvim-whisky) is used in this image.
+**NOTE:** The colorscheme **umbra** from [nvim-nyctophilia](https://github.com/javiorfo/nvim-nyctophilia) is used in this image.
