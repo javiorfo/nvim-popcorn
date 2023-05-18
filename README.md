@@ -79,7 +79,7 @@ local opts = {
 }
 
 -- Open popup
-popcorn:new(opts):pop()
+popcorn:new(opts):pop() -- pop() returns popup buffer id
 ```
 
 #### BORDERS
