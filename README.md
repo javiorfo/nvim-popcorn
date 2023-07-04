@@ -7,11 +7,11 @@ Neovim library for popup utilities written in Lua
 ## Installation
 `Packer`
 ```lua
-use 'javiorfo/nvim-popcorn'
+use 'caosystema/nvim-popcorn'
 ```
 `Lazy`
 ```lua
-{ 'javiorfo/nvim-popcorn' }
+{ 'caosystema/nvim-popcorn' }
 ```
 
 ## Overview
@@ -83,15 +83,15 @@ popcorn:new(opts):pop() -- pop() returns popup buffer id
 ```
 
 #### BORDERS
-- Check the borders available in [this file](https://github.com/javiorfo/nvim-popcorn/blob/master/lua/popcorn/borders.lua)
+- Check the borders available in [this file](https://github.com/caosystema/nvim-popcorn/blob/master/lua/popcorn/borders.lua)
 - You can add your own border if you like. Further information in `:help popcorn`
 
 ## Screenshots
-#### Examples of the differents popup's included in this library. Run `:luafile %` in [these files](https://github.com/javiorfo/nvim-popcorn/blob/master/tests)
+#### Examples of the differents popup's included in this library. Run `:luafile %` in [these files](https://github.com/caosystema/nvim-popcorn/blob/master/tests)
 
-<img src="https://github.com/javiorfo/img/blob/master/nvim-popcorn/popcorn.gif?raw=true" alt="popcorn" style="width:800px;"/>
+<img src="https://github.com/caosystema/img/blob/master/nvim-popcorn/popcorn.gif?raw=true" alt="popcorn" style="width:800px;"/>
 
-**NOTE:** The colorscheme **umbra** from [nvim-nyctophilia](https://github.com/javiorfo/nvim-nyctophilia) is used in this image.
+**NOTE:** The colorscheme **umbra** from [nvim-nyctophilia](https://github.com/caosystema/nvim-nyctophilia) is used in this image.
 
 ---
 
