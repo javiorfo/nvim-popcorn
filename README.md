@@ -89,11 +89,12 @@ popcorn:new(opts):pop() -- pop() returns popup buffer id
 ## Screenshots
 #### Examples of the differents popup's included in this library. Run `:luafile %` in [these files](https://github.com/caosystema/nvim-popcorn/blob/master/tests)
 
-<img src="https://github.com/caosystema/img/blob/master/nvim-popcorn/popcorn.gif?raw=true" alt="popcorn" style="width:800px;"/>
+<img src="https://github.com/caosystema/img/blob/master/nvim-popcorn/popcorn.gif?raw=true" alt="popcorn" />
 
 **NOTE:** The colorscheme **umbra** from [nvim-nyctophilia](https://github.com/caosystema/nvim-nyctophilia) is used in this image.
 
 ---
 
-### Donate
+### Support CaoSystema's Work
+- [Binance](https://raw.githubusercontent.com/caosystema/img/master/BinancePayQR.png)
 - [Paypal](https://www.paypal.com/donate/?hosted_button_id=FA7SGLSCT2H8G)
