@@ -7,11 +7,11 @@ Neovim library for popup utilities written in Lua
 ## Installation
 `Packer`
 ```lua
-use 'progrimorio/nvim-popcorn'
+use 'javiorfo/nvim-popcorn'
 ```
 `Lazy`
 ```lua
-{ 'progrimorio/nvim-popcorn' }
+{ 'javiorfo/nvim-popcorn' }
 ```
 
 ## Overview
@@ -83,18 +83,18 @@ popcorn:new(opts):pop() -- pop() returns popup buffer id
 ```
 
 #### BORDERS
-- Check the borders available in [this file](https://github.com/progrimorio/nvim-popcorn/blob/master/lua/popcorn/borders.lua)
+- Check the borders available in [this file](https://github.com/javiorfo/nvim-popcorn/blob/master/lua/popcorn/borders.lua)
 - You can add your own border if you like. Further information in `:help popcorn`
 
 ## Screenshots
-#### Examples of the differents popup's included in this library. Run `:luafile %` in [these files](https://github.com/progrimorio/nvim-popcorn/blob/master/tests)
+#### Examples of the differents popup's included in this library. Run `:luafile %` in [these files](https://github.com/javiorfo/nvim-popcorn/blob/master/tests)
 
-<img src="https://github.com/progrimorio/img/blob/master/nvim-popcorn/popcorn.gif?raw=true" alt="popcorn" />
+<img src="https://github.com/javiorfo/img/blob/master/nvim-popcorn/popcorn.gif?raw=true" alt="popcorn" />
 
-**NOTE:** The colorscheme **umbra** from [nvim-nyctophilia](https://github.com/progrimorio/nvim-nyctophilia) is used in this image.
+**NOTE:** The colorscheme **umbra** from [nvim-nyctophilia](https://github.com/javiorfo/nvim-nyctophilia) is used in this image.
 
 ---
 
 ### Donate
-- [Binance](https://raw.githubusercontent.com/progrimorio/img/master/binance/progrimorio.png)
+- [Binance](https://raw.githubusercontent.com/javiorfo/img/master/binance/javiorfo.png)
 - [Paypal](https://www.paypal.com/donate/?hosted_button_id=FA7SGLSCT2H8G)
