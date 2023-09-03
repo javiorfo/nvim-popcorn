@@ -76,6 +76,13 @@ local opts = {
     callback = function()
         print("Callback result => " .. vim.fn.getline(1))
     end
+    
+    -- Optional
+    -- Add some actions after all the popup configuration is set
+    -- I could be autocmd's for example
+    do_after = function()
+        -- do something after...
+    end
 }
 
 -- Open popup

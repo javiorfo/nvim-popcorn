@@ -78,6 +78,12 @@ are optional: >
         -- In this example It will print the first line of the popup body
         callback = function()
             print("Callback result => " .. vim.fn.getline(1))
+        end,
+
+        -- Optional
+        -- Add some actions after all the popup configuration is set
+        -- I could be autocmd's for example
+        do_after = function()
         end
     }
 
