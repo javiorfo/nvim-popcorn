@@ -149,8 +149,8 @@ function popcorn:pop()
         })
 
         local map_opts = { noremap = true, silent = true }
-        vim.api.nvim_buf_set_keymap(buf_text, 'n', '<esc>', '<cmd>quit<cr>', map_opts)
-        vim.api.nvim_buf_set_keymap(buf_text, 'n', '<cr>', '<cmd>lua require("popcorn").execute_callback()<cr>', map_opts)
+        vim.api.nvim_buf_set_keymap(0, 'n', '<esc>', '<cmd>quit<cr>', map_opts)
+        vim.api.nvim_buf_set_keymap(0, 'n', '<cr>', '<cmd>lua require("popcorn").execute_callback()<cr>', map_opts)
 
         if self.do_after then self.do_after() end
 
