@@ -7,10 +7,14 @@ local opts = {
     border = borders.rounded_corners_border,
     title = { "Popcorn Callback" },
     content = {
-        { "Type value: ", "Boolean" }
+        { "Type value:  ", "Boolean" }
     },
+    callback_keymap = "<C-Space>",
     callback = function()
-        print("Callback result => " .. (string.gsub(vim.fn.getline(1), "Type value: ", "")))
+        print("Callback result =>" .. (string.gsub(vim.fn.getline(1), "Type value:", "")))
+    end,
+    do_after = function()
+        vim.api.nvim_win_set_cursor(0, { 1, 13 })
     end
 }
 

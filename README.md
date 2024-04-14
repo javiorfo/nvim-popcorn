@@ -69,13 +69,17 @@ local opts = {
     -- content is a function
     -- In this example a terminal is opened in the popup body
     -- content = function() vim.cmd("start | term") end 
+
+    -- Optional. If a callback is necessary this is the keymap to execute it
+    -- Default value is <CR> if this variable is not set
+    callback_keymap = "<CR>",
     
     -- Optional. If a callback is necessary this is the implementation
-    -- Pressing <CR> will execute the callback
+    -- Pressing <CR> (variable above) will execute the callback
     -- In this example It will print the first line of the popup body
     callback = function()
         print("Callback result => " .. vim.fn.getline(1))
-    end
+    end,
     
     -- Optional
     -- Add some actions after all the popup configuration is set
