@@ -58,7 +58,7 @@ end
 function popcorn.execute_callback()
     if popcorn.callback then
         local fn = popcorn.callback()
-        popcorn.callback = nil
+--         popcorn.callback = nil
         if fn and type(fn) == "function" then
             fn()
         end
