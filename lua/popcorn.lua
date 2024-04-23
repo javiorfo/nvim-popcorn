@@ -57,9 +57,11 @@ end
 
 function popcorn.execute_callback()
     if popcorn.callback then
-        popcorn.callback()
+        local fn = popcorn.callback()
         popcorn.callback = nil
-        vim.cmd("quit")
+        if fn and type(fn) == "function" then
+            fn()
+        end
     end
 end
 
