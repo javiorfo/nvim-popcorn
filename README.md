@@ -98,7 +98,7 @@ popcorn:new(opts):pop() -- pop() returns popup buffer id
 - You can add your own border if you like. Further information in `:help popcorn`
 
 ## Screenshots
-#### Examples of the differents popup's included in this library. Run `:luafile %` in [these files](https://github.com/javiorfo/nvim-popcorn/blob/master/tests)
+#### Examples of the differents popup's included in this library. Run `:luafile %` in [these files](https://github.com/javiorfo/nvim-popcorn/blob/master/examples)
 
 <img src="https://github.com/javiorfo/img/blob/master/nvim-popcorn/popcorn.gif?raw=true" alt="popcorn" />
 
