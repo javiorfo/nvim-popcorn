@@ -81,6 +81,7 @@ function popcorn:pop()
         if not self.border then
             self.border = borders.simple_border
         end
+
         local buf_border = vim.api.nvim_create_buf(false, true)
         local ui = vim.api.nvim_list_uis()[1]
         local width = self.width
@@ -114,6 +115,7 @@ function popcorn:pop()
         }
 
         vim.api.nvim_open_win(buf_border, true, opts_border)
+        vim.api.nvim_win_set_option(0, 'winhl', 'Normal:Normal')
 
         if self.title and self.title[1] and self.title[2] then
             vim.cmd(string.format("syn match popcornTitle '%s' | hi link popcornTitle %s", self.title[1], self.title[2]))
@@ -154,6 +156,7 @@ function popcorn:pop()
         vim.api.nvim_buf_set_keymap(0, 'n', '<esc>', '<cmd>quit<cr>', map_opts)
         vim.api.nvim_buf_set_keymap(0, 'n', self.callback_keymap or '<CR>', '<cmd>lua require("popcorn").execute_callback()<cr>', map_opts)
 
+        vim.api.nvim_win_set_option(0, 'winhl', 'Normal:Normal')
         if self.do_after then self.do_after() end
 
         return buf_text
