@@ -86,8 +86,14 @@ are optional: >
 
         -- Optional
         -- Add some actions after all the popup configuration is set
-        -- I could be autocmd's for example
+        -- It could be autocmd's for example
         do_after = function()
+        end,
+        
+        -- Optional
+        -- Add some actions after the popup is closed
+        -- It could be autocmd's for example
+        on_close = function()
         end
     }
 

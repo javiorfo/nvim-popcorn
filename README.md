@@ -83,8 +83,15 @@ local opts = {
     
     -- Optional
     -- Add some actions after all the popup configuration is set
-    -- I could be autocmd's for example
+    -- It could be autocmd's for example
     do_after = function()
+        -- do something after...
+    end,
+
+    -- Optional
+    -- Add some actions after the popup is closed
+    -- It could be autocmd's for example
+    on_close = function()
         -- do something after...
     end
 }
